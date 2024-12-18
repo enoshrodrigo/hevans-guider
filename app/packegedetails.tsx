@@ -3,8 +3,17 @@ import { StyleSheet, View, Image, Text, ScrollView, Appearance, TouchableOpacity
 import { useRoute } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons'; 
+import MapScreen from '@/components/common/MapScreen ';
 
 const EventDetailsScreen = () => {
+  const pathCoordinates = [
+    { latitude: 51.5744, longitude: 5.1935 }, // Start
+    { latitude: 51.5760, longitude: 5.1935 }, // Stop 1
+    { latitude: 51.5760, longitude: 5.1970 }, // Stop 2
+    { latitude: 51.5785, longitude: 5.1970 }, // Stop 3
+    { latitude: 51.5785, longitude: 5.2000 }, // Stop 4
+    { latitude: 51.5800, longitude: 5.2000 }, // End
+  ];
   const route = useRoute();
   const { passID } = route.params as { passID: any };
   const [colorScheme, setColorScheme] = useState(Appearance.getColorScheme());
@@ -45,22 +54,9 @@ const EventDetailsScreen = () => {
           <Text style={styles.price}>{/* {event.price} */}2,000,900</Text>
         </View>
         <Text style={styles.description}>{/* {event.description} */}Intents Festival is one of the largest and most advanced dance festivals in the Netherlands, offering an unforgettable experience with the best DJs.</Text>
-        <View style={styles.addressContainer}>
-          <Text style={styles.label}>Address</Text>
-          <Text style={styles.address}>{/* {event.address} */}Oisterwijk, Netherlands</Text>
-          <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: 51.5744,/* event.location.lat */
-              longitude:  5.1935,/* event.location.lng */
-              latitudeDelta: 0.01,
-              longitudeDelta: 0.01,
-            }}
-          >
-            <Marker coordinate={{ latitude: 51.5744, longitude: 5.1935 }} />
-          </MapView>
-        </View>
-        <Text style={styles.swipeText}>Swipe to view the Prices</Text>
+        
+        <MapScreen pathCoordinates={pathCoordinates} />
+                <Text style={styles.swipeText}>Swipe to view the Prices</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.priceScrollContainer}>
           {prices.map((price, index) => (
             <View key={index} style={styles.ticketContainer}>
