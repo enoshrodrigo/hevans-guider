@@ -50,8 +50,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Tab Two',
+          title: 'Travel Plan',
           tabBarIcon: ({ color }) => <TabBarIcon name="plane" color={color} />,
+        }}
+      />
+       <Tabs.Screen
+        name="chatbot"
+        options={{
+          title: 'ChatBot',
+          tabBarIcon: ({ color }) => <TabBarIcon name="magic" color={color} />,
         }}
       />
     </Tabs>
